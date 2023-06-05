@@ -1,0 +1,18 @@
+- ADD
+     - Employee Number
+     - First Name
+     - Middle Name
+     - Last Name
+     - Hiring Date
+- LIST
+- SEARCH
+    - SORT
+       - Employee Number
+       - First Name
+       - Middle Name
+       - Last Name
+       - Hiring Date
+- DELETE
+    - BY ID
+
+- OPTIONS & DISPLAY
