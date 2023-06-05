@@ -15,6 +15,8 @@ public interface EmployeeService {
 
   List<Employee> getEmployeeByMiddleName(String middleName);
 
+  List<Employee> getEmployeeByHiringDate(String hiringDate);
+
   List<Employee> getAll();
 
   void deleteEmployeeByEmployeeNumber(int employeeNumber);

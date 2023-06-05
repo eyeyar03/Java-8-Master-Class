@@ -38,6 +38,11 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
+  public List<Employee> getEmployeeByHiringDate(String hiringDate) {
+    return getMatchedEmployees(e -> e.getHiringDate() == hiringDate);
+  }
+
+  @Override
   public List<Employee> getAll() {
     return EmployeeRepository.getEmployees();
   }
