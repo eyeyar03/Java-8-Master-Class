@@ -3,6 +3,7 @@ package com.masterclass.employee.directory.serviceimplementation;
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.repository.EmployeeRepository;
 import com.masterclass.employee.directory.service.EmployeeService;
+import com.masterclass.employee.directory.util.SortEnum;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -23,39 +24,43 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public List<Employee> getEmployeeByFirstName(String firstName) {
-    return getMatchedEmployees(e -> e.getFirstName() == firstName);
+  public List<Employee> getEmployeeByFirstName(String firstName, SortEnum sortEnum) {
+    return getMatchedEmployees(e -> e.getFirstName() == firstName, sortEnum);
   }
 
   @Override
-  public List<Employee> getEmployeeByLastName(String lastName) {
-    return getMatchedEmployees(e -> e.getLastName() == lastName);
+  public List<Employee> getEmployeeByLastName(String lastName, SortEnum sortEnum) {
+    return getMatchedEmployees(e -> e.getLastName() == lastName, sortEnum);
   }
 
   @Override
-  public List<Employee> getEmployeeByMiddleName(String middleName) {
-    return getMatchedEmployees(e -> e.getMiddleName() == middleName);
+  public List<Employee> getEmployeeByMiddleName(String middleName, SortEnum sortEnum) {
+    return getMatchedEmployees(e -> e.getMiddleName() == middleName, sortEnum);
   }
 
   @Override
-  public List<Employee> getEmployeeByHiringDate(String hiringDate) {
-    return getMatchedEmployees(e -> e.getHiringDate() == hiringDate);
+  public List<Employee> getEmployeeByHiringDate(String hiringDate, SortEnum sortEnum) {
+    return getMatchedEmployees(e -> e.getHiringDate() == hiringDate, sortEnum);
   }
 
   @Override
-  public List<Employee> getAll() {
-    return EmployeeRepository.getEmployees();
+  public List<Employee> getAll(SortEnum sortEnum) {
+    return EmployeeRepository.getEmployees().stream()
+        .sorted(sortEnum.getComparator())
+        .collect(Collectors.toList());
   }
 
   @Override
   public void deleteEmployeeByEmployeeNumber(int employeeNumber) {
     EmployeeRepository.setEmployees(
-        getMatchedEmployees(e -> e.getEmployeeNumber() != employeeNumber));
+        getMatchedEmployees(e -> e.getEmployeeNumber() != employeeNumber, SortEnum.defaultSort()));
   }
 
-  private List<Employee> getMatchedEmployees(Predicate<Employee> employeePredicate) {
+  private List<Employee> getMatchedEmployees(
+      Predicate<Employee> employeePredicate, SortEnum sortEnum) {
     return EmployeeRepository.getEmployees().stream()
         .filter(employeePredicate)
+        .sorted(sortEnum.getComparator())
         .collect(Collectors.toList());
   }
 }
