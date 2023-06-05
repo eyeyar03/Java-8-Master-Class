@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.repository.EmployeeRepository;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -256,6 +257,21 @@ class EmployeeServiceTest {
                 expectedEmployeesMap.get(e.getEmployeeNumber()), Optional.ofNullable(e)));
   }
 
+  @Test
+  void shouldDeleteEmployee() {
+    List<Employee> employees = employeeService.getAll();
+    assertEquals(7, employees.size());
+
+    employeeService.deleteEmployeeByEmployeeNumber(12345);
+
+    employees = employeeService.getAll();
+    assertEquals(6, employees.size());
+
+    Optional<Employee> optionalEmployee = employeeService.getEmployeeByEmployeeNumber(12345);
+
+    assertFalse(optionalEmployee.isPresent());
+  }
+
   private void assertEmployee(
       Employee expectedEmployee, Optional<Employee> actualOptionalEmployee) {
     assertTrue(actualOptionalEmployee.isPresent());
@@ -270,7 +286,7 @@ class EmployeeServiceTest {
   }
 
   private void addEmployees() {
-    EmployeeRepository.clearEmployees();
+    EmployeeRepository.setEmployees(new ArrayList<>());
     employeeService.addEmployee(
         Employee.builder()
             .employeeNumber(12345)

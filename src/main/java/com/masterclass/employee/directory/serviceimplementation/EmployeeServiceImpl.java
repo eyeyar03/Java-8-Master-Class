@@ -42,6 +42,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     return EmployeeRepository.getEmployees();
   }
 
+  @Override
+  public void deleteEmployeeByEmployeeNumber(int employeeNumber) {
+    EmployeeRepository.setEmployees(
+        getMatchedEmployees(e -> e.getEmployeeNumber() != employeeNumber));
+  }
+
   private List<Employee> getMatchedEmployees(Predicate<Employee> employeePredicate) {
     return EmployeeRepository.getEmployees().stream()
         .filter(employeePredicate)

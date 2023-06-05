@@ -16,4 +16,6 @@ public interface EmployeeService {
   List<Employee> getEmployeeByMiddleName(String middleName);
 
   List<Employee> getAll();
+
+  void deleteEmployeeByEmployeeNumber(int employeeNumber);
 }

@@ -6,19 +6,19 @@ import java.util.List;
 
 public class EmployeeRepository {
 
-    private static List<Employee> employees = new ArrayList<>();
+  private static List<Employee> employees = new ArrayList<>();
 
-    public static int addEmployee(Employee employee) {
-        employees.add(employee);
+  public static int addEmployee(Employee employee) {
+    employees.add(employee);
 
-        return employee.getEmployeeNumber();
-    }
+    return employee.getEmployeeNumber();
+  }
 
-    public static List<Employee> getEmployees() {
-        return employees;
-    }
+  public static List<Employee> getEmployees() {
+    return employees;
+  }
 
-  public static void clearEmployees() {
-        employees = new ArrayList<>();
-    }
+  public static void setEmployees(List<Employee> employees) {
+    EmployeeRepository.employees = employees;
+  }
 }
