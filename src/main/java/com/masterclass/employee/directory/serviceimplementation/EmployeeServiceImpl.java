@@ -37,6 +37,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     return getMatchedEmployees(e -> e.getMiddleName() == middleName);
   }
 
+  @Override
+  public List<Employee> getAll() {
+    return EmployeeRepository.getEmployees();
+  }
+
   private List<Employee> getMatchedEmployees(Predicate<Employee> employeePredicate) {
     return EmployeeRepository.getEmployees().stream()
         .filter(employeePredicate)

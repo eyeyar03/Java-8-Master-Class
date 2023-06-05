@@ -172,6 +172,90 @@ class EmployeeServiceTest {
                 expectedEmployeesMap.get(e.getEmployeeNumber()), Optional.ofNullable(e)));
   }
 
+  @Test
+  void getAllEmployeesShouldReturnEmployees() {
+    Map<Integer, Employee> expectedEmployeesMap = new HashMap<>();
+    expectedEmployeesMap.put(
+        12345,
+        Employee.builder()
+            .employeeNumber(12345)
+            .firstName("Peter")
+            .hiringDate("2023-06-06")
+            .lastName("Parker")
+            .middleName("S")
+            .build());
+
+    expectedEmployeesMap.put(
+        12346,
+        Employee.builder()
+            .employeeNumber(12346)
+            .firstName("Bruce")
+            .hiringDate("2023-06-07")
+            .lastName("Wayne")
+            .middleName("B")
+            .build());
+
+    expectedEmployeesMap.put(
+        12347,
+        Employee.builder()
+            .employeeNumber(12347)
+            .firstName("Barry")
+            .hiringDate("2023-06-07")
+            .lastName("Allen")
+            .middleName("F")
+            .build());
+
+    expectedEmployeesMap.put(
+        12348,
+        Employee.builder()
+            .employeeNumber(12348)
+            .firstName("Tony")
+            .hiringDate("2023-06-08")
+            .lastName("Stark")
+            .middleName("I")
+            .build());
+
+    expectedEmployeesMap.put(
+        12349,
+        Employee.builder()
+            .employeeNumber(12349)
+            .firstName("Peter")
+            .hiringDate("2023-06-09")
+            .lastName("Quill")
+            .middleName("S")
+            .build());
+
+    expectedEmployeesMap.put(
+        12350,
+        Employee.builder()
+            .employeeNumber(12350)
+            .firstName("Arthur")
+            .hiringDate("2023-06-10")
+            .lastName("Curry")
+            .middleName("A")
+            .build());
+
+    expectedEmployeesMap.put(
+        12351,
+        Employee.builder()
+            .employeeNumber(12351)
+            .firstName("Bruce")
+            .hiringDate("2023-06-11")
+            .lastName("Banner")
+            .middleName("H")
+            .build());
+
+    List<Employee> employees = employeeService.getAll();
+
+    assertFalse(employees.isEmpty());
+    assertEquals(7, employees.size());
+
+    employees.forEach(
+        e ->
+            assertEmployee(
+                expectedEmployeesMap.get(e.getEmployeeNumber()), Optional.ofNullable(e)));
+  }
+
   private void assertEmployee(
       Employee expectedEmployee, Optional<Employee> actualOptionalEmployee) {
     assertTrue(actualOptionalEmployee.isPresent());

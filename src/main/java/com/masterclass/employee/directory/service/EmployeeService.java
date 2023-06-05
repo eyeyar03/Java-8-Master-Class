@@ -14,4 +14,6 @@ public interface EmployeeService {
   List<Employee> getEmployeeByLastName(String lastName);
 
   List<Employee> getEmployeeByMiddleName(String middleName);
+
+  List<Employee> getAll();
 }
