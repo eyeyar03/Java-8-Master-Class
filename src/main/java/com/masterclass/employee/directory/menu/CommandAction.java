@@ -1,4 +1,4 @@
-package com.masterclass.employee.directory.controller;
+package com.masterclass.employee.directory.menu;
 
 @FunctionalInterface
 public interface CommandAction {
