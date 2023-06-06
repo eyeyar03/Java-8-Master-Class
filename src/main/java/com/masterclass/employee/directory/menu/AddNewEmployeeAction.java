@@ -64,7 +64,12 @@ public class AddNewEmployeeAction implements CommandAction {
 
     if (optionalEmployee.isPresent()) {
       System.out.println("Employee Record Added Successfully: " + LocalDateTime.now());
-      System.out.println(optionalEmployee.get());
+      System.out.println("Number: " + optionalEmployee.get().getEmployeeNumber());
+      System.out.println("Name: "
+              + optionalEmployee.get().getFirstName() + " "
+              + optionalEmployee.get().getMiddleName() + " "
+              + optionalEmployee.get().getLastName());
+      System.out.println("Date Hired: " + optionalEmployee.get().getHiringDate() + "\n");
     }
   }
 }

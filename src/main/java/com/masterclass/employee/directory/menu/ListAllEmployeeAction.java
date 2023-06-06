@@ -20,8 +20,11 @@ public class ListAllEmployeeAction implements CommandAction {
 
     CommandAction sortMenu = new SortMenuAction(userSelectionState);
     sortMenu.doAction();
-
+    System.out.println("==========================================================================================");
+    System.out.println("Employee Number                 Name                                       Date Hired");
+    System.out.println("==========================================================================================");
     employeeService.getAll(userSelectionState.getSortEnum()).forEach(System.out::println);
+    System.out.println("==========================================================================================");
 
     CommandAction mainMenu = new MainMenuAction(new UserSelectionState());
     mainMenu.doAction();
