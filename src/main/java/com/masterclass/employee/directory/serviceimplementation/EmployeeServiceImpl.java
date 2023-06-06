@@ -52,8 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public void deleteEmployeeByEmployeeNumber(int employeeNumber) {
-    EmployeeRepository.setEmployees(
-        getMatchedEmployees(e -> e.getEmployeeNumber() != employeeNumber, SortEnum.defaultSort()));
+    List<Employee> employeesTobeDeleted =
+        getMatchedEmployees(e -> e.getEmployeeNumber() == employeeNumber, SortEnum.defaultSort());
+    EmployeeRepository.getEmployees().removeAll(employeesTobeDeleted);
   }
 
   private List<Employee> getMatchedEmployees(
