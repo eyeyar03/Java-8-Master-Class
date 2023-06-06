@@ -6,7 +6,6 @@ import lombok.ToString;
 
 @Data
 @Builder
-@ToString
 public class Employee {
 
   private int employeeNumber;
@@ -18,4 +17,18 @@ public class Employee {
   private String lastName;
 
   private String middleName;
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    int empNumberWidth = 45;
+    int nameWidth = 45;
+    int dateHiredWidth = 40;
+
+    builder.append(String.format("%-" + empNumberWidth + "s%-" + nameWidth + "s%-" + dateHiredWidth + "s", employeeNumber,firstName.concat(" ").concat(middleName).concat(" ").concat(lastName), hiringDate));
+
+    String employeeFormat = builder.toString();
+
+    return employeeFormat;
+  }
 }

@@ -29,8 +29,10 @@ public class DeleteEmployeeAction implements CommandAction {
       System.out.println("Employee " + employeeOptional.get().getFirstName() + "is deleted! ");
         userSelectionState.getPreviousCommandActions().pop().doAction();
       } else {
+      //if nothing to delete should return to the input
       System.out.println("Nothing to delete! Employee not found!\n");
       userSelectionState.getPreviousCommandActions().pop().doAction();
+
     }
   }
 }

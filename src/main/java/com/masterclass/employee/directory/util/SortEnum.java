@@ -10,7 +10,8 @@ public enum SortEnum {
 
   BY_LAST_NAME(Comparator.comparing(Employee::getLastName)),
 
-  BY_HIRING_DATE(Comparator.comparing(Employee::getHiringDate));
+  BY_HIRING_DATE(Comparator.comparing(Employee::getHiringDate)),
+  BY_MIDDLE_NAME(Comparator.comparing(Employee::getMiddleName));
 
   private Comparator<Employee> comparator;
 
