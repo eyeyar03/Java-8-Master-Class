@@ -1,10 +1,17 @@
 package com.masterclass.employee.directory.menu;
 
+import com.masterclass.employee.directory.menu.option.Option;
 import com.masterclass.employee.directory.model.UserSelectionState;
+import com.masterclass.employee.directory.util.OptionsHelper;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+@Option(label = "List All Employee Records", key = 1)
+@Option(label = "Add New Employee Record", key = 2)
+@Option(label = "Delete Employee Record", key = 3)
+@Option(label = "Search Employee Record", key = 4)
+@Option(label = "Exit", key = -1)
 public class MainMenuAction implements CommandAction {
 
   private Map<Integer, CommandAction> commandActionsMap;
@@ -26,13 +33,7 @@ public class MainMenuAction implements CommandAction {
   public void doAction() {
     userSelectionState.getPreviousCommandActions().add(this);
 
-    System.out.println("Main Option");
-    System.out.println("[1] List All Employee Records");
-    System.out.println("[2] Add New Employee Record");
-    System.out.println("[3] Delete Employee Record");
-    System.out.println("[4] Search Employee Record");
-    System.out.println("[-1] exit\n");
-    System.out.print("Enter action type: ");
+    OptionsHelper.printOptions(this.getClass(), "Main Options", "Enter action type: ");
 
     Scanner scan = new Scanner(System.in);
     int choice = scan.nextInt();

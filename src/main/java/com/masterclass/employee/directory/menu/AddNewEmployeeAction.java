@@ -22,23 +22,26 @@ public class AddNewEmployeeAction implements CommandAction {
   public void doAction() {
     System.out.println("You selected Add New Employee Record");
 
-    Scanner scan = new Scanner(System.in);
-    System.out.println("Employee Number: ");
+    Scanner scanner = new Scanner(System.in);
 
-    int employeeNumber = scan.nextInt();
+    Optional<Integer> optionalEmployeeNumber;
+    do {
+      optionalEmployeeNumber = getEmployeeNumber();
+    } while (!optionalEmployeeNumber.isPresent());
 
-    scan.nextLine();
+    int employeeNumber = optionalEmployeeNumber.get();
+
     System.out.println("First name: ");
-    String firstName = scan.nextLine();
+    String firstName = scanner.nextLine();
 
     System.out.println("Last name: ");
-    String lastName = scan.nextLine();
+    String lastName = scanner.nextLine();
 
     System.out.println("Middle Name: ");
-    String middleName = scan.nextLine();
+    String middleName = scanner.nextLine();
 
     System.out.println("Hiring Date: ");
-    String hiringDate = scan.nextLine();
+    String hiringDate = scanner.nextLine();
 
     Employee employee =
         Employee.builder()
@@ -58,6 +61,24 @@ public class AddNewEmployeeAction implements CommandAction {
     mainMenu.doAction();
   }
 
+  private Optional<Integer> getEmployeeNumber() {
+    Scanner scanner = new Scanner(System.in);
+
+    Optional<Integer> optionalEmployeeNumber = Optional.empty();
+
+    try {
+      System.out.println("Employee Number: ");
+      int employeeNumber = scanner.nextInt();
+
+      optionalEmployeeNumber = Optional.of(employeeNumber);
+
+    } catch (Exception e) {
+      System.out.println("Invalid entry. Try again.");
+    }
+
+    return optionalEmployeeNumber;
+  }
+
   private void displaySuccessMessage(int addedEmployeeNumber) {
     Optional<Employee> optionalEmployee =
         employeeService.getEmployeeByEmployeeNumber(addedEmployeeNumber);
@@ -65,9 +86,12 @@ public class AddNewEmployeeAction implements CommandAction {
     if (optionalEmployee.isPresent()) {
       System.out.println("Employee Record Added Successfully: " + LocalDateTime.now());
       System.out.println("Number: " + optionalEmployee.get().getEmployeeNumber());
-      System.out.println("Name: "
-              + optionalEmployee.get().getFirstName() + " "
-              + optionalEmployee.get().getMiddleName() + " "
+      System.out.println(
+          "Name: "
+              + optionalEmployee.get().getFirstName()
+              + " "
+              + optionalEmployee.get().getMiddleName()
+              + " "
               + optionalEmployee.get().getLastName());
       System.out.println("Date Hired: " + optionalEmployee.get().getHiringDate() + "\n");
     }

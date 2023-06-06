@@ -1,11 +1,18 @@
 package com.masterclass.employee.directory.menu;
 
+import com.masterclass.employee.directory.menu.option.Option;
 import com.masterclass.employee.directory.model.UserSelectionState;
+import com.masterclass.employee.directory.util.OptionsHelper;
 import com.masterclass.employee.directory.util.SortEnum;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+@Option(label = "Sorted by Employee Number", key = 1)
+@Option(label = "Sorted by First Name", key = 2)
+@Option(label = "Sorted by Last Name", key = 3)
+@Option(label = "Sorted by Hiring Date", key = 4)
+@Option(label = "Back", key = -1)
 public class SortMenuAction implements CommandAction {
 
   private static final Map<Integer, SortEnum> SORT_ENUMS_MAP;
@@ -26,13 +33,7 @@ public class SortMenuAction implements CommandAction {
 
   @Override
   public void doAction() {
-    System.out.println("Choose an action");
-    System.out.println("[1] Sorted by Employee Number");
-    System.out.println("[2] Sorted by First Name");
-    System.out.println("[3] Sorted by Last Name");
-    System.out.println("[4] Sorted by Hiring Date");
-    System.out.println("[-1] back\n");
-    System.out.print("Select action: ");
+    OptionsHelper.printOptions(this.getClass(), "Choose an action", "Select action: ");
 
     Scanner scan = new Scanner(System.in);
     int choice = scan.nextInt();
