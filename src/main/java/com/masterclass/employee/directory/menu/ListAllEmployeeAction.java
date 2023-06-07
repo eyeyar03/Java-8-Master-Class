@@ -5,6 +5,8 @@ import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
+
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class ListAllEmployeeAction implements CommandAction {
@@ -19,15 +21,22 @@ public class ListAllEmployeeAction implements CommandAction {
 
   @Override
   public void doAction() {
-    System.out.println("You selected List All Employee Records");
+    boolean runMenu = true;
+    int choice = 0;
 
-    CommandAction sortMenu = new SortMenuAction(userSelectionState);
-    sortMenu.doAction();
-    List<Employee> employees = employeeService.getAll(userSelectionState.getSortEnum());
+    while (runMenu) {
+      System.out.println("You selected List All Employee Records");
+      CommandAction sortMenu = new SortMenuAction(userSelectionState);
+      try {
+        sortMenu.doAction();
+        List<Employee> employees = employeeService.getAll(userSelectionState.getSortEnum());
+        DisplaySupplier.getDisplay().accept(employees);
+      } catch (InputMismatchException e) {
+        System.out.println("Invalid Input");
+        sortMenu.doAction();
+      }
+    }
 
-    DisplaySupplier.getDisplay().accept(employees);
 
-    CommandAction mainMenu = new MainMenuAction(new UserSelectionState());
-    mainMenu.doAction();
   }
 }
