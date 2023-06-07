@@ -11,7 +11,7 @@ public class DefaultDisplayForNewlyAddedEmployee implements Consumer<List<Employ
   public void accept(List<Employee> employees) {
     Employee newlyAddedEmployee = employees.get(0);
 
-    System.out.println("Employee Record Added Successfully: " + LocalDateTime.now());
+    System.out.println("\nEmployee Record Added Successfully: " + LocalDateTime.now());
     System.out.println("Number: " + newlyAddedEmployee.getEmployeeNumber());
     System.out.println(
         "Name: "

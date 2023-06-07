@@ -25,16 +25,16 @@ public class AddNewEmployeeAction implements CommandAction {
     int employeeNumber = InputHelper.askUserToProvideEmployeeNumber();
 
     Scanner scanner = new Scanner(System.in);
-    System.out.println("First name: ");
+    System.out.print("First name: ");
     String firstName = scanner.nextLine();
 
-    System.out.println("Last name: ");
+    System.out.print("Last name: ");
     String lastName = scanner.nextLine();
 
-    System.out.println("Middle Name: ");
+    System.out.print("Middle Name: ");
     String middleName = scanner.nextLine();
 
-    System.out.println("Hiring Date: ");
+    System.out.print("Hiring Date: ");
     String hiringDate = scanner.nextLine();
 
     Employee employee =
