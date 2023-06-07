@@ -4,7 +4,7 @@ import com.masterclass.employee.directory.model.Employee;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class DefaultDisplay implements Consumer<List<Employee>> {
+public class DefaultDisplayForListingEmployees implements Consumer<List<Employee>> {
 
   @Override
   public void accept(List<Employee> employees) {

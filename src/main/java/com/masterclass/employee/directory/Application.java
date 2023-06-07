@@ -3,18 +3,17 @@ package com.masterclass.employee.directory;
 import com.masterclass.employee.directory.menu.CommandAction;
 import com.masterclass.employee.directory.menu.MainMenuAction;
 import com.masterclass.employee.directory.model.UserSelectionState;
-import com.masterclass.employee.directory.util.TestData;
+import com.masterclass.employee.directory.util.TestDataUtil;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
 
   public static void main(String[] args) {
-    TestData generateTest = new TestData();
-    UserSelectionState userSelectionState = new UserSelectionState();
+    TestDataUtil.generateTestData();
 
-    CommandAction MAIN_MENU = new MainMenuAction(userSelectionState);
+    CommandAction mainMenuAction = new MainMenuAction(new UserSelectionState());
 
-    MAIN_MENU.doAction();
+    mainMenuAction.doAction();
   }
 }

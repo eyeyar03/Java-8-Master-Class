@@ -2,11 +2,10 @@ package com.masterclass.employee.directory.menu;
 
 import com.masterclass.employee.directory.menu.option.Option;
 import com.masterclass.employee.directory.model.UserSelectionState;
-import com.masterclass.employee.directory.util.OptionsHelper;
+import com.masterclass.employee.directory.util.InputHelper;
 import com.masterclass.employee.directory.util.SortEnum;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 @Option(label = "Sorted by Employee Number", key = 1)
 @Option(label = "Sorted by First Name", key = 2)
@@ -33,23 +32,15 @@ public class SortMenuAction implements CommandAction {
 
   @Override
   public void doAction() {
-    OptionsHelper.printOptions(this.getClass(), "Choose an action", "Select action: ");
+    int selectedOption =
+        InputHelper.askUserToSelect(this.getClass(), "Choose an action", "Select action: ");
 
-    Scanner scan = new Scanner(System.in);
-    int choice = scan.nextInt();
-
-    if (choice == -1) {
+    if (selectedOption == -1) {
       userSelectionState.getPreviousCommandActions().pop().doAction();
       return;
     }
 
-    SortEnum sortEnum = SORT_ENUMS_MAP.get(choice);
-
-    if (sortEnum != null) {
-      userSelectionState.setSortEnum(sortEnum);
-
-    } else {
-      doAction();
-    }
+    SortEnum sortEnum = SORT_ENUMS_MAP.get(selectedOption);
+    userSelectionState.setSortEnum(sortEnum);
   }
 }

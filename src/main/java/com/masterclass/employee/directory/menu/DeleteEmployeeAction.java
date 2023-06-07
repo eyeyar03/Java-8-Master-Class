@@ -4,9 +4,8 @@ import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
-
+import com.masterclass.employee.directory.util.InputHelper;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class DeleteEmployeeAction implements CommandAction {
 
@@ -19,18 +18,29 @@ public class DeleteEmployeeAction implements CommandAction {
 
   @Override
   public void doAction() {
-    System.out.println("You selected Delete Employee Record");
-    System.out.print("Enter Employee Number: ");
-    Scanner scan = new Scanner(System.in);
-    int deleteEmp = scan.nextInt();
-    Optional<Employee> employeeOptional = employeeService.getEmployeeByEmployeeNumber(deleteEmp);
-    if (employeeOptional.isPresent()) {
-      employeeService.deleteEmployeeByEmployeeNumber(deleteEmp);
-      System.out.println("Employee " + employeeOptional.get().getFirstName() + "is deleted! ");
-        userSelectionState.getPreviousCommandActions().pop().doAction();
-      } else {
-      System.out.println("Nothing to delete! Employee not found!\n");
-      userSelectionState.getPreviousCommandActions().pop().doAction();
+    int employeeNumber = InputHelper.askUserToProvideEmployeeNumber();
+
+    Optional<Employee> optionalEmployee =
+        employeeService.getEmployeeByEmployeeNumber(employeeNumber);
+
+    if (optionalEmployee.isPresent()) {
+      employeeService.deleteEmployeeByEmployeeNumber(employeeNumber);
+
+      Employee deletedEmployee = optionalEmployee.get();
+      System.out.println(
+          String.format(
+              "Deleted [%d] %s %s %s (%s).",
+              deletedEmployee.getEmployeeNumber(),
+              deletedEmployee.getFirstName(),
+              deletedEmployee.getMiddleName(),
+              deletedEmployee.getLastName(),
+              deletedEmployee.getHiringDate()));
+
+    } else {
+      System.out.println(
+          String.format("Employee with employee number %d cannot be found!\n", employeeNumber));
     }
+
+    userSelectionState.getPreviousCommandActions().pop().doAction();
   }
 }

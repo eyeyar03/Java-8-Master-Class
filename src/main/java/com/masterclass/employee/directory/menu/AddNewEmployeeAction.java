@@ -1,10 +1,12 @@
 package com.masterclass.employee.directory.menu;
 
+import com.masterclass.employee.directory.display.DisplaySupplier;
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
-import java.time.LocalDateTime;
+import com.masterclass.employee.directory.util.InputHelper;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -20,17 +22,9 @@ public class AddNewEmployeeAction implements CommandAction {
 
   @Override
   public void doAction() {
-    System.out.println("You selected Add New Employee Record");
+    int employeeNumber = InputHelper.askUserToProvideEmployeeNumber();
 
     Scanner scanner = new Scanner(System.in);
-
-    Optional<Integer> optionalEmployeeNumber;
-    do {
-      optionalEmployeeNumber = getEmployeeNumber();
-    } while (!optionalEmployeeNumber.isPresent());
-
-    int employeeNumber = optionalEmployeeNumber.get();
-
     System.out.println("First name: ");
     String firstName = scanner.nextLine();
 
@@ -53,30 +47,10 @@ public class AddNewEmployeeAction implements CommandAction {
             .build();
 
     int addedEmployeeNumber = employeeService.addEmployee(employee);
-    userSelectionState.setAddedEmployeeNumber(addedEmployeeNumber);
 
     displaySuccessMessage(addedEmployeeNumber);
 
-    CommandAction mainMenu = new MainMenuAction(userSelectionState);
-    mainMenu.doAction();
-  }
-
-  private Optional<Integer> getEmployeeNumber() {
-    Scanner scanner = new Scanner(System.in);
-
-    Optional<Integer> optionalEmployeeNumber = Optional.empty();
-
-    try {
-      System.out.println("Employee Number: ");
-      int employeeNumber = scanner.nextInt();
-
-      optionalEmployeeNumber = Optional.of(employeeNumber);
-
-    } catch (Exception e) {
-      System.out.println("Invalid entry. Try again.");
-    }
-
-    return optionalEmployeeNumber;
+    userSelectionState.getPreviousCommandActions().pop().doAction();
   }
 
   private void displaySuccessMessage(int addedEmployeeNumber) {
@@ -84,16 +58,8 @@ public class AddNewEmployeeAction implements CommandAction {
         employeeService.getEmployeeByEmployeeNumber(addedEmployeeNumber);
 
     if (optionalEmployee.isPresent()) {
-      System.out.println("Employee Record Added Successfully: " + LocalDateTime.now());
-      System.out.println("Number: " + optionalEmployee.get().getEmployeeNumber());
-      System.out.println(
-          "Name: "
-              + optionalEmployee.get().getFirstName()
-              + " "
-              + optionalEmployee.get().getMiddleName()
-              + " "
-              + optionalEmployee.get().getLastName());
-      System.out.println("Date Hired: " + optionalEmployee.get().getHiringDate() + "\n");
+      DisplaySupplier.getDefaultDisplayForNewlyAddedEmployee()
+          .accept(Arrays.asList(optionalEmployee.get()));
     }
   }
 }

@@ -6,7 +6,7 @@ import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
-import com.masterclass.employee.directory.util.OptionsHelper;
+import com.masterclass.employee.directory.util.InputHelper;
 import com.masterclass.employee.directory.util.SortEnum;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,39 +44,34 @@ public class SearchEmployeeAction implements CommandAction {
 
   @Override
   public void doAction() {
-    OptionsHelper.printOptions(this.getClass(), "Choose an action", "Select action: ");
+    int selectedOption =
+        InputHelper.askUserToSelect(this.getClass(), "Choose an action", "Select action: ");
 
-    Scanner scan = new Scanner(System.in);
-    int choice = scan.nextInt();
-
-    if (choice == -1) {
+    if (selectedOption == -1) {
       userSelectionState.getPreviousCommandActions().pop().doAction();
       return;
     }
 
-    Runnable runnable = searchesMap.get(choice);
+    userSelectionState.getPreviousCommandActions().add(this);
+    Runnable runnable = searchesMap.get(selectedOption);
 
-    if (runnable != null) {
-      runnable.run();
-    } else {
-      doAction();
-    }
+    runnable.run();
 
-    CommandAction mainMenu = new MainMenuAction(new UserSelectionState());
-    mainMenu.doAction();
+    userSelectionState.getPreviousCommandActions().pop().doAction();
   }
 
   private void searchByEmployeeNumber() {
-    System.out.println("You selected Search by Employee Number");
-    System.out.print("Enter Employee Number: ");
-    Scanner scan = new Scanner(System.in);
-    int sel = scan.nextInt();
-    Optional<Employee> employeeOptional = employeeService.getEmployeeByEmployeeNumber(sel);
-    if (employeeOptional.isPresent()) {
-      DisplaySupplier.getDisplay().accept(Arrays.asList(employeeOptional.get()));
-    } else {
-      DisplaySupplier.getDisplay().accept(Collections.emptyList());
-    }
+    int employeeNumber = InputHelper.askUserToProvideEmployeeNumber();
+
+    Optional<Employee> employeeOptional =
+        employeeService.getEmployeeByEmployeeNumber(employeeNumber);
+
+    List<Employee> matchedEmployee =
+        employeeOptional.isPresent()
+            ? Arrays.asList(employeeOptional.get())
+            : Collections.emptyList();
+
+    DisplaySupplier.getDefaultDisplayForListingEmployees().accept(matchedEmployee);
   }
 
   private void searchByFirstName() {
@@ -87,7 +82,7 @@ public class SearchEmployeeAction implements CommandAction {
     List<Employee> searchedEmployee =
         employeeService.getEmployeeByFirstName(firstName, SortEnum.defaultSort());
 
-    DisplaySupplier.getDisplay().accept(searchedEmployee);
+    DisplaySupplier.getDefaultDisplayForListingEmployees().accept(searchedEmployee);
   }
 
   private void searchByLastName() {
@@ -98,7 +93,7 @@ public class SearchEmployeeAction implements CommandAction {
     List<Employee> searchedEmployee =
         employeeService.getEmployeeByLastName(lastName, SortEnum.defaultSort());
 
-    DisplaySupplier.getDisplay().accept(searchedEmployee);
+    DisplaySupplier.getDefaultDisplayForListingEmployees().accept(searchedEmployee);
   }
 
   private void searchByMiddleName() {
@@ -109,7 +104,7 @@ public class SearchEmployeeAction implements CommandAction {
     List<Employee> searchedEmployee =
         employeeService.getEmployeeByMiddleName(middleName, SortEnum.defaultSort());
 
-    DisplaySupplier.getDisplay().accept(searchedEmployee);
+    DisplaySupplier.getDefaultDisplayForListingEmployees().accept(searchedEmployee);
   }
 
   private void searchByHiringDate() {
@@ -120,6 +115,6 @@ public class SearchEmployeeAction implements CommandAction {
     List<Employee> searchedEmployee =
         employeeService.getEmployeeByHiringDate(hiringDate, SortEnum.defaultSort());
 
-    DisplaySupplier.getDisplay().accept(searchedEmployee);
+    DisplaySupplier.getDefaultDisplayForListingEmployees().accept(searchedEmployee);
   }
 }
