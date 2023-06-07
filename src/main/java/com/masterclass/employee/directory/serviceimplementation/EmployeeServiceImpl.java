@@ -25,22 +25,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public List<Employee> getEmployeeByFirstName(String firstName, SortEnum sortEnum) {
-    return getMatchedEmployees(e -> e.getFirstName() == firstName, sortEnum);
+    return getMatchedEmployees(e -> e.getFirstName().equalsIgnoreCase(firstName), sortEnum);
   }
 
   @Override
   public List<Employee> getEmployeeByLastName(String lastName, SortEnum sortEnum) {
-    return getMatchedEmployees(e -> e.getLastName() == lastName, sortEnum);
+    return getMatchedEmployees(e -> e.getLastName().equalsIgnoreCase(lastName), sortEnum);
   }
 
   @Override
   public List<Employee> getEmployeeByMiddleName(String middleName, SortEnum sortEnum) {
-    return getMatchedEmployees(e -> e.getMiddleName() == middleName, sortEnum);
+    return getMatchedEmployees(e -> e.getMiddleName().equalsIgnoreCase(middleName), sortEnum);
   }
 
   @Override
   public List<Employee> getEmployeeByHiringDate(String hiringDate, SortEnum sortEnum) {
-    return getMatchedEmployees(e -> e.getHiringDate() == hiringDate, sortEnum);
+    return getMatchedEmployees(e -> e.getHiringDate().equalsIgnoreCase(hiringDate), sortEnum);
   }
 
   @Override

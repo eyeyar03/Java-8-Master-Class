@@ -31,16 +31,16 @@ public class AddNewEmployeeAction implements CommandAction {
 
     int employeeNumber = optionalEmployeeNumber.get();
 
-    System.out.println("First name: ");
+    System.out.print("First name: ");
     String firstName = scanner.nextLine();
 
-    System.out.println("Last name: ");
+    System.out.print("Last name: ");
     String lastName = scanner.nextLine();
 
-    System.out.println("Middle Name: ");
+    System.out.print("Middle Name: ");
     String middleName = scanner.nextLine();
 
-    System.out.println("Hiring Date: ");
+    System.out.print("Hiring Date: ");
     String hiringDate = scanner.nextLine();
 
     Employee employee =
@@ -67,7 +67,7 @@ public class AddNewEmployeeAction implements CommandAction {
     Optional<Integer> optionalEmployeeNumber = Optional.empty();
 
     try {
-      System.out.println("Employee Number: ");
+      System.out.print("Employee Number: ");
       int employeeNumber = scanner.nextInt();
 
       optionalEmployeeNumber = Optional.of(employeeNumber);
