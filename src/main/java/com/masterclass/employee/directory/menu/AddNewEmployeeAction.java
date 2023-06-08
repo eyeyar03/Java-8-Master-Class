@@ -5,16 +5,17 @@ import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_HIRI
 import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_LAST_NAME;
 import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_MIDDLE_NAME;
 
-import com.masterclass.employee.directory.display.DisplaySupplier;
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
 import com.masterclass.employee.directory.util.InputHelper;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.function.Function;
 
 public class AddNewEmployeeAction implements CommandAction {
+
+  private final Function<Employee, CommandAction> displayNewlyAddedEmployeeActionFunction =
+      DisplayNewlyAddedEmployeeAction::new;
 
   private EmployeeService employeeService = new EmployeeServiceImpl();
 
@@ -42,20 +43,10 @@ public class AddNewEmployeeAction implements CommandAction {
             .hiringDate(hiringDate)
             .build();
 
-    int addedEmployeeNumber = employeeService.addEmployee(employee);
+    employeeService.addEmployee(employee);
 
-    displaySuccessMessage(addedEmployeeNumber);
+    displayNewlyAddedEmployeeActionFunction.apply(employee).doAction();
 
     userSelectionState.getPreviousCommandActions().pop().doAction();
-  }
-
-  private void displaySuccessMessage(int addedEmployeeNumber) {
-    Optional<Employee> optionalEmployee =
-        employeeService.getEmployeeByEmployeeNumber(addedEmployeeNumber);
-
-    if (optionalEmployee.isPresent()) {
-      DisplaySupplier.getDefaultDisplayForNewlyAddedEmployee()
-          .accept(Arrays.asList(optionalEmployee.get()));
-    }
   }
 }

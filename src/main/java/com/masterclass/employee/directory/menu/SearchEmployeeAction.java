@@ -13,7 +13,6 @@ import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_BY
 import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_BY_LAST_NAME;
 import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_BY_MIDDLE_NAME;
 
-import com.masterclass.employee.directory.display.DisplaySupplier;
 import com.masterclass.employee.directory.menu.option.Option;
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
@@ -27,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Option(label = OPTION_SEARCH_BY_EMPLOYEE_NUMBER, key = 1)
@@ -36,6 +36,9 @@ import java.util.function.Supplier;
 @Option(label = OPTION_SEARCH_BY_HIRING_DATE, key = 5)
 @Option(label = OPTION_BACK, key = -1)
 public class SearchEmployeeAction implements CommandAction {
+
+  private final Function<List<Employee>, CommandAction> displayEmployeesActionFunction =
+      DisplayEmployeesAction::new;
 
   private final Map<Integer, Supplier<List<Employee>>> searchesMap;
 
@@ -69,7 +72,7 @@ public class SearchEmployeeAction implements CommandAction {
     userSelectionState.getPreviousCommandActions().add(this);
     Supplier<List<Employee>> searchSupplier = searchesMap.get(selectedOption);
 
-    DisplaySupplier.getDefaultDisplayForListingEmployees().accept(searchSupplier.get());
+    displayEmployeesActionFunction.apply(searchSupplier.get()).doAction();
 
     userSelectionState.getPreviousCommandActions().pop().doAction();
   }

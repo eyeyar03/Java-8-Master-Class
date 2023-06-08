@@ -1,4 +1,4 @@
-package com.masterclass.employee.directory.display;
+package com.masterclass.employee.directory.menu;
 
 import static com.masterclass.employee.directory.util.Constants.DISPLAY_EMPLOYEE_FULL_NAME_FORMAT;
 import static com.masterclass.employee.directory.util.Constants.DISPLAY_LINE;
@@ -13,12 +13,17 @@ import static com.masterclass.employee.directory.util.Constants.EMPTY_STRING;
 
 import com.masterclass.employee.directory.model.Employee;
 import java.util.List;
-import java.util.function.Consumer;
 
-public class DefaultDisplayForListingEmployees implements Consumer<List<Employee>> {
+public class DisplayEmployeesAction implements CommandAction {
+
+  private final List<Employee> employees;
+
+  public DisplayEmployeesAction(List<Employee> employees) {
+    this.employees = employees;
+  }
 
   @Override
-  public void accept(List<Employee> employees) {
+  public void doAction() {
     System.out.println(DISPLAY_LINE);
     System.out.printf(
         DISPLAY_TABLE_HEADER_FORMAT,
