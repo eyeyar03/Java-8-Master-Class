@@ -75,4 +75,11 @@ public class InputHelper {
 
     return optionalEmployeeNumber;
   }
+
+  public static String askUserToProvideInput(String instruction) {
+    System.out.print(instruction);
+
+    Scanner scanner = new Scanner(System.in);
+    return scanner.nextLine();
+  }
 }

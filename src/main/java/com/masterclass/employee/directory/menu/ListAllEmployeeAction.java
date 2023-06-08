@@ -21,7 +21,6 @@ public class ListAllEmployeeAction implements CommandAction {
 
   @Override
   public void doAction() {
-    System.out.println("You selected List All Employee Records");
     sortMenu.doAction();
 
     List<Employee> employees = employeeService.getAll(userSelectionState.getSortEnum());

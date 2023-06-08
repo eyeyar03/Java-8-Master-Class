@@ -5,13 +5,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.masterclass.employee.directory.util.Constants.MESSAGE_EMPLOYEE_SUCCESSFULLY_ADDED;
+
 public class DefaultDisplayForNewlyAddedEmployee implements Consumer<List<Employee>> {
 
   @Override
   public void accept(List<Employee> employees) {
     Employee newlyAddedEmployee = employees.get(0);
 
-    System.out.println("\nEmployee Record Added Successfully: " + LocalDateTime.now());
+    System.out.println(MESSAGE_EMPLOYEE_SUCCESSFULLY_ADDED + LocalDateTime.now());
     System.out.println("Number: " + newlyAddedEmployee.getEmployeeNumber());
     System.out.println(
         "Name: "

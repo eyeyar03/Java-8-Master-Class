@@ -1,16 +1,24 @@
 package com.masterclass.employee.directory.menu;
 
+import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_ENTER_ACTION_TYPE;
+import static com.masterclass.employee.directory.util.Constants.OPTION_ADD_NEW_EMPLOYEE_RECORD;
+import static com.masterclass.employee.directory.util.Constants.OPTION_DELETE_EMPLOYEE_RECORD;
+import static com.masterclass.employee.directory.util.Constants.OPTION_EXIT;
+import static com.masterclass.employee.directory.util.Constants.OPTION_HEADER_MAIN_OPTIONS;
+import static com.masterclass.employee.directory.util.Constants.OPTION_LIST_ALL_EMPLOYEE_RECORDS;
+import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_EMPLOYEE_RECORD;
+
 import com.masterclass.employee.directory.menu.option.Option;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.util.InputHelper;
 import java.util.HashMap;
 import java.util.Map;
 
-@Option(label = "List All Employee Records", key = 1)
-@Option(label = "Add New Employee Record", key = 2)
-@Option(label = "Delete Employee Record", key = 3)
-@Option(label = "Search Employee Record", key = 4)
-@Option(label = "Exit", key = -1)
+@Option(label = OPTION_LIST_ALL_EMPLOYEE_RECORDS, key = 1)
+@Option(label = OPTION_ADD_NEW_EMPLOYEE_RECORD, key = 2)
+@Option(label = OPTION_DELETE_EMPLOYEE_RECORD, key = 3)
+@Option(label = OPTION_SEARCH_EMPLOYEE_RECORD, key = 4)
+@Option(label = OPTION_EXIT, key = -1)
 public class MainMenuAction implements CommandAction {
 
   private Map<Integer, CommandAction> commandActionsMap;
@@ -33,7 +41,8 @@ public class MainMenuAction implements CommandAction {
     userSelectionState.getPreviousCommandActions().add(this);
 
     int selectedOption =
-        InputHelper.askUserToSelect(this.getClass(), "Main Options", "Enter action type: ");
+        InputHelper.askUserToSelect(
+            this.getClass(), OPTION_HEADER_MAIN_OPTIONS, INSTRUCTION_ENTER_ACTION_TYPE);
 
     CommandAction commandAction = commandActionsMap.get(selectedOption);
     commandAction.doAction();

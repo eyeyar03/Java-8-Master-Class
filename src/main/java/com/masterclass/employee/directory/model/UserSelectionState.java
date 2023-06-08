@@ -1,7 +1,6 @@
 package com.masterclass.employee.directory.model;
 
 import com.masterclass.employee.directory.menu.CommandAction;
-import com.masterclass.employee.directory.util.SearchEnum;
 import com.masterclass.employee.directory.util.SortEnum;
 import java.util.Stack;
 import lombok.Data;
@@ -12,7 +11,6 @@ public class UserSelectionState {
   private Stack<CommandAction> previousCommandActions = new Stack<>();
 
   private SortEnum sortEnum = SortEnum.defaultSort();
-  private SearchEnum searchEnum = SearchEnum.defaultSearch();
 
   private int addedEmployeeNumber;
 }

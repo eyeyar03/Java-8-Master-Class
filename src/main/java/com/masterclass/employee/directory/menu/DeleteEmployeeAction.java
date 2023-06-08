@@ -1,5 +1,8 @@
 package com.masterclass.employee.directory.menu;
 
+import static com.masterclass.employee.directory.util.Constants.MESSAGE_DELETED_EMPLOYEE;
+import static com.masterclass.employee.directory.util.Constants.MESSAGE_EMPLOYEE_NOT_FOUND;
+
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
@@ -29,7 +32,7 @@ public class DeleteEmployeeAction implements CommandAction {
       Employee deletedEmployee = optionalEmployee.get();
       System.out.println(
           String.format(
-              "Deleted [%d] %s %s %s (%s).",
+              MESSAGE_DELETED_EMPLOYEE,
               deletedEmployee.getEmployeeNumber(),
               deletedEmployee.getFirstName(),
               deletedEmployee.getMiddleName(),
@@ -37,8 +40,7 @@ public class DeleteEmployeeAction implements CommandAction {
               deletedEmployee.getHiringDate()));
 
     } else {
-      System.out.println(
-          String.format("Employee with employee number %d cannot be found!\n", employeeNumber));
+      System.out.println(String.format(MESSAGE_EMPLOYEE_NOT_FOUND, employeeNumber));
     }
 
     userSelectionState.getPreviousCommandActions().pop().doAction();

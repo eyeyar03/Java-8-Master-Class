@@ -14,9 +14,9 @@ public final class TestDataUtil {
     Employee emp1 =
         Employee.builder()
             .employeeNumber(20220607)
-            .firstName("Bruce")
+            .firstName("Aaron")
             .hiringDate("2022-06-07")
-            .lastName("Wayne")
+            .lastName("Macandili")
             .middleName("B")
             .build();
 
