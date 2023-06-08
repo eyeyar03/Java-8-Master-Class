@@ -1,7 +1,8 @@
-package com.masterclass.employee.directory.menu;
+package com.masterclass.employee.directory.menu.display;
 
 import static com.masterclass.employee.directory.util.Constants.MESSAGE_EMPLOYEE_SUCCESSFULLY_ADDED;
 
+import com.masterclass.employee.directory.menu.CommandAction;
 import com.masterclass.employee.directory.model.Employee;
 import java.time.LocalDateTime;
 

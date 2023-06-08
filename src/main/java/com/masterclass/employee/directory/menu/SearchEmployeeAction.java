@@ -13,6 +13,7 @@ import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_BY
 import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_BY_LAST_NAME;
 import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_BY_MIDDLE_NAME;
 
+import com.masterclass.employee.directory.menu.display.DisplayEmployeesAction;
 import com.masterclass.employee.directory.menu.option.Option;
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;

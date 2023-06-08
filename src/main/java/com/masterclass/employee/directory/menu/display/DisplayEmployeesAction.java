@@ -1,4 +1,4 @@
-package com.masterclass.employee.directory.menu;
+package com.masterclass.employee.directory.menu.display;
 
 import static com.masterclass.employee.directory.util.Constants.DISPLAY_EMPLOYEE_FULL_NAME_FORMAT;
 import static com.masterclass.employee.directory.util.Constants.DISPLAY_LINE;
@@ -11,6 +11,7 @@ import static com.masterclass.employee.directory.util.Constants.DISPLAY_TABLE_HE
 import static com.masterclass.employee.directory.util.Constants.DISPLAY_TABLE_HEADER_NAME;
 import static com.masterclass.employee.directory.util.Constants.EMPTY_STRING;
 
+import com.masterclass.employee.directory.menu.CommandAction;
 import com.masterclass.employee.directory.model.Employee;
 import java.util.List;
 

@@ -5,6 +5,7 @@ import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_HIRI
 import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_LAST_NAME;
 import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_MIDDLE_NAME;
 
+import com.masterclass.employee.directory.menu.display.DisplayNewlyAddedEmployeeAction;
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
