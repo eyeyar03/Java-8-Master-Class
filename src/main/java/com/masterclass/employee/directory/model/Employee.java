@@ -3,6 +3,8 @@ package com.masterclass.employee.directory.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 public class Employee {
@@ -11,7 +13,7 @@ public class Employee {
 
   private String firstName;
 
-  private String hiringDate;
+  private LocalDate hiringDate;
 
   private String lastName;
 

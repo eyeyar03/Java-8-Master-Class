@@ -35,7 +35,7 @@ public final class Constants {
 
   public static final String INSTRUCTION_FIRST_NAME = "First name: ";
 
-  public static final String INSTRUCTION_HIRING_DATE = "Hiring Date: ";
+  public static final String INSTRUCTION_HIRING_DATE = "Enter Date Hired (yyyy-MM-dd): ";
 
   public static final String INSTRUCTION_LAST_NAME = "Last name: ";
 

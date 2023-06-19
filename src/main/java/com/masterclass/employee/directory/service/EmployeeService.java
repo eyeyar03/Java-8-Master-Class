@@ -21,5 +21,4 @@ public interface EmployeeService {
   List<Employee> getAll(SortEnum sortEnum);
 
   Optional<Employee> deleteEmployeeByEmployeeNumber(int employeeNumber);
-
 }

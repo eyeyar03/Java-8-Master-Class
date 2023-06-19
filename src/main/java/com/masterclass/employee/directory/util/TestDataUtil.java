@@ -4,6 +4,8 @@ import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
 
+import java.time.LocalDate;
+
 public final class TestDataUtil {
 
   private TestDataUtil() {}
@@ -15,7 +17,7 @@ public final class TestDataUtil {
         Employee.builder()
             .employeeNumber(20220607)
             .firstName("Aaron")
-            .hiringDate("2022-06-07")
+            .hiringDate(LocalDate.of(2022,06,07))
             .lastName("Macandili")
             .middleName("B")
             .build();
@@ -24,7 +26,7 @@ public final class TestDataUtil {
         Employee.builder()
             .employeeNumber(20230105)
             .firstName("Jerome")
-            .hiringDate("2023-01-05")
+            .hiringDate(LocalDate.of(2023,01,05))
             .lastName("Garcia")
             .middleName("G")
             .build();
@@ -33,7 +35,7 @@ public final class TestDataUtil {
         Employee.builder()
             .employeeNumber(20231005)
             .firstName("Alejandro Jr")
-            .hiringDate("2023-10-05")
+            .hiringDate(LocalDate.of(2023,10,05))
             .lastName("Alinsangan")
             .middleName("Z")
             .build();

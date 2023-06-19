@@ -11,6 +11,8 @@ import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
 import com.masterclass.employee.directory.util.InputHelper;
+
+import java.time.LocalDate;
 import java.util.function.Function;
 
 public class AddNewEmployeeAction implements CommandAction {
@@ -33,7 +35,7 @@ public class AddNewEmployeeAction implements CommandAction {
     String firstName = InputHelper.askUserToProvideInput(INSTRUCTION_FIRST_NAME);
     String lastName = InputHelper.askUserToProvideInput(INSTRUCTION_LAST_NAME);
     String middleName = InputHelper.askUserToProvideInput(INSTRUCTION_MIDDLE_NAME);
-    String hiringDate = InputHelper.askUserToProvideInput(INSTRUCTION_HIRING_DATE);
+    LocalDate hiringDate = InputHelper.askUserToProvideHiringDate(INSTRUCTION_HIRING_DATE);
 
     Employee employee =
         Employee.builder()

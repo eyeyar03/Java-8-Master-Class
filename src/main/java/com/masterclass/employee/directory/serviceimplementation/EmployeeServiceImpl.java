@@ -40,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public List<Employee> getEmployeeByHiringDate(String hiringDate, SortEnum sortEnum) {
-    return getMatchedEmployees(e -> e.getHiringDate().equalsIgnoreCase(hiringDate), sortEnum);
+    return getMatchedEmployees(e -> e.getHiringDate().equals(hiringDate), sortEnum);
   }
 
   @Override
