@@ -1,0 +1,10 @@
+Employee Number,FirstName,MiddleName,LastName,DateHired
+10001,Andres, de Castro, Bonifacio, Nov 30, 1863
+10002,Antonio, Ancheta, Luna, Oct 29, 1866
+10003,Jose, Realonda, Rizal, Jun 19, 1861
+10004,Juan, Ancheta, Luna,  Oct 23, 1857
+10005,Macario, de Leon, Sakay, Mar 01, 1878
+10006,Gregorio, Sempio, Del Pilar, Nov 14, 1875
+10007,Mariano, delos Angeles, Gomez, Aug 02, 1799
+10008,Jose, Garcia, Burgoz, Feb 09, 1837
+10009,Jacinto, del Rosario, Zamora, Aug 14, 1835

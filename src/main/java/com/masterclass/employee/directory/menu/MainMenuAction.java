@@ -1,23 +1,21 @@
 package com.masterclass.employee.directory.menu;
 
-import static com.masterclass.employee.directory.util.Constants.INSTRUCTION_ENTER_ACTION_TYPE;
-import static com.masterclass.employee.directory.util.Constants.OPTION_ADD_NEW_EMPLOYEE_RECORD;
-import static com.masterclass.employee.directory.util.Constants.OPTION_DELETE_EMPLOYEE_RECORD;
-import static com.masterclass.employee.directory.util.Constants.OPTION_EXIT;
-import static com.masterclass.employee.directory.util.Constants.OPTION_HEADER_MAIN_OPTIONS;
-import static com.masterclass.employee.directory.util.Constants.OPTION_LIST_ALL_EMPLOYEE_RECORDS;
-import static com.masterclass.employee.directory.util.Constants.OPTION_SEARCH_EMPLOYEE_RECORD;
-
 import com.masterclass.employee.directory.menu.option.Option;
 import com.masterclass.employee.directory.model.UserSelectionState;
 import com.masterclass.employee.directory.util.InputHelper;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.masterclass.employee.directory.util.Constants.*;
 
 @Option(label = OPTION_LIST_ALL_EMPLOYEE_RECORDS, key = 1)
 @Option(label = OPTION_ADD_NEW_EMPLOYEE_RECORD, key = 2)
 @Option(label = OPTION_DELETE_EMPLOYEE_RECORD, key = 3)
 @Option(label = OPTION_SEARCH_EMPLOYEE_RECORD, key = 4)
+@Option(label = OPTION_READ_FROM_FILE, key = 5)
+@Option(label = EXPORT_TO_FILE,key = 6)
 @Option(label = OPTION_EXIT, key = -1)
 public class MainMenuAction implements CommandAction {
 
@@ -33,6 +31,7 @@ public class MainMenuAction implements CommandAction {
     commandActionsMap.put(2, new AddNewEmployeeAction(userSelectionState));
     commandActionsMap.put(3, new DeleteEmployeeAction(userSelectionState));
     commandActionsMap.put(4, new SearchEmployeeAction(userSelectionState));
+    commandActionsMap.put(5, new ReadFromFileAction());
     commandActionsMap.put(-1, new ExitAction());
   }
 

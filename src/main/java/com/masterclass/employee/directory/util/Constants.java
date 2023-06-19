@@ -43,6 +43,8 @@ public final class Constants {
 
   public static final String INSTRUCTION_SELECT_AN_ACTION = "Select action: ";
 
+  public static final String INSTRUCTION_ENTER_FILENAME = "Enter Filename: ";
+
   public static final String MESSAGE_DELETED_EMPLOYEE = "Deleted [%d] %s %s %s (%s).\n";
 
   public static final String MESSAGE_EMPLOYEE_NOT_FOUND =
@@ -85,4 +87,8 @@ public final class Constants {
   public static final String OPTION_SORT_BY_HIRING_DATE = "Sorted by Hiring Date";
 
   public static final String OPTION_SORT_BY_LAST_NAME = "Sorted by Last Name";
+
+  public static final String OPTION_READ_FROM_FILE = "Read From File";
+
+  public static final String EXPORT_TO_FILE = "Export to File";
 }
