@@ -39,7 +39,9 @@ public class ReadFromFileAction implements CommandAction{
         try(Stream<String> lines = Files.lines(Paths.get(fileName))){
             List<Employee> employees = lines.skip(1).map(this::buildEmployee).collect(Collectors.toList());
             optionalEmployees = Optional.of(employees);
-
+            for (Employee employee : employees){
+                System.out.println(employee);
+            }
 
         }catch(Exception e){
 //            System.out.println("Error encountered reading file " +fileName);
@@ -51,13 +53,15 @@ public class ReadFromFileAction implements CommandAction{
 
     private Employee buildEmployee(String line) {
         String[] employeeDetails = line.split(",");
+        String dateHired = line.substring(line.lastIndexOf(",")-6).trim();
 
         return Employee.builder().employeeNumber(Integer.parseInt(employeeDetails[0]))
                 .firstName(employeeDetails[1])
                 .middleName(employeeDetails[2])
                 .lastName(employeeDetails[3])
-                .hiringDate(getHiringDate(employeeDetails[4]))
+                .hiringDate(getHiringDate(dateHired))
                 .build();
+
     }
 
     private LocalDate getHiringDate(String date){
