@@ -22,7 +22,7 @@ public class EmployeeRepository {
     EmployeeRepository.employees = employees;
   }
 
-  public static void addAllEmployees(List<Employee> employees){
-    employees.addAll(employees);
+  public static void addAllEmployees(List<Employee> employeesToBeAdded){
+    employees.addAll(employeesToBeAdded);
   }
 }

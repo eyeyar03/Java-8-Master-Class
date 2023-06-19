@@ -53,7 +53,13 @@ public final class Constants {
   public static final String MESSAGE_EMPLOYEE_SUCCESSFULLY_ADDED =
       "\nEmployee Record Added Successfully: ";
 
+  public static final String MESSAGE_ERROR_ENCOUNTERED_READING_FILE =
+      "Error encountered reading file %s \n";
+
   public static final String MESSAGE_EXIT = "Goodbye!";
+
+  public static final String MESSAGE_RECORDS_SUCCESSFULLY_IMPORTED_FROM_FILE =
+      "Records successfully imported from file %s \n\n";
 
   public static final String OPTION_ADD_NEW_EMPLOYEE_RECORD = "Add New Employee Record";
 
@@ -63,10 +69,14 @@ public final class Constants {
 
   public static final String OPTION_EXIT = "Exit";
 
+  public static final String OPTION_EXPORT_TO_FILE = "Export to File";
+
   public static final String OPTION_HEADER_CHOOSE_AN_ACTION = "Choose an action";
   public static final String OPTION_HEADER_MAIN_OPTIONS = "Main Options";
 
   public static final String OPTION_LIST_ALL_EMPLOYEE_RECORDS = "List All Employee Records";
+
+  public static final String OPTION_READ_FROM_FILE = "Read From File";
 
   public static final String OPTION_SEARCH_BY_EMPLOYEE_NUMBER = "Search by Employee Number";
 
@@ -87,8 +97,4 @@ public final class Constants {
   public static final String OPTION_SORT_BY_HIRING_DATE = "Sorted by Hiring Date";
 
   public static final String OPTION_SORT_BY_LAST_NAME = "Sorted by Last Name";
-
-  public static final String OPTION_READ_FROM_FILE = "Read From File";
-
-  public static final String EXPORT_TO_FILE = "Export to File";
 }
