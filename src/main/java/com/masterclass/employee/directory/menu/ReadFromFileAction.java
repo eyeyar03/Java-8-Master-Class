@@ -34,7 +34,7 @@ public class ReadFromFileAction implements CommandAction{
     private Optional<List<Employee>> parseEmployeeFromFile() {
         Optional<List<Employee>> optionalEmployees = Optional.empty();
         String fileName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_FILENAME);
-//        String fileName = "exercise6.txt";
+//        String fileName = "./src/main/resources/exercise6/exercise6.txt";
 
         try(Stream<String> lines = Files.lines(Paths.get(fileName))){
             List<Employee> employees = lines.skip(1).map(this::buildEmployee).collect(Collectors.toList());
@@ -42,7 +42,8 @@ public class ReadFromFileAction implements CommandAction{
 
 
         }catch(Exception e){
-            System.out.println("Error encountered reading file " +fileName);
+//            System.out.println("Error encountered reading file " +fileName);
+            System.out.println(e);
         }
 
         return optionalEmployees;
