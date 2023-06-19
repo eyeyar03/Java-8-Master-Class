@@ -21,6 +21,7 @@ import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
 import com.masterclass.employee.directory.util.InputHelper;
 import com.masterclass.employee.directory.util.SortEnum;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -108,7 +109,7 @@ public class SearchEmployeeAction implements CommandAction {
   }
 
   private List<Employee> searchByHiringDate() {
-    String hiringDate = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_HIRING_DATE);
+    LocalDate hiringDate = InputHelper.askUserToProvideHiringDate(INSTRUCTION_ENTER_HIRING_DATE);
 
     return employeeService.getEmployeeByHiringDate(hiringDate, SortEnum.defaultSort());
   }

@@ -2,12 +2,8 @@ package com.masterclass.employee.directory.util;
 
 import com.masterclass.employee.directory.exceptions.FutureDateIsNotAllowedException;
 import com.masterclass.employee.directory.menu.option.Option;
-import com.masterclass.employee.directory.model.Employee;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -97,7 +93,6 @@ public class InputHelper {
     } while (!optionalHiringDate.isPresent());
 
     return optionalHiringDate.get();
-
   }
 
   private static Optional<LocalDate> getHiringDate(String instruction) {
@@ -108,11 +103,10 @@ public class InputHelper {
       System.out.print(instruction);
       String hiringDate = scanner.nextLine();
 
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      LocalDate hiringDateFormatted =
+          LocalDate.parse(hiringDate, DateTimeFormatterEnum.YYYYhMMhDD.getDateTimeFormatter());
 
-      LocalDate hiringDateFormatted = LocalDate.parse(hiringDate,formatter);
-
-      if (hiringDateFormatted.isAfter(LocalDate.now())){
+      if (hiringDateFormatted.isAfter(LocalDate.now())) {
         throw new FutureDateIsNotAllowedException();
       }
 
@@ -120,12 +114,10 @@ public class InputHelper {
 
     } catch (FutureDateIsNotAllowedException e) {
       System.out.println("Invalid Date. Future Date is not Allowed");
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       System.out.println("Invalid Date Format. Please enter date in yyyy-MM-dd format");
     }
 
     return optionalHiringDate;
   }
-
 }

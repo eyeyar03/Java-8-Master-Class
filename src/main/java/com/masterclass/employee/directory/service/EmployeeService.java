@@ -2,6 +2,8 @@ package com.masterclass.employee.directory.service;
 
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.util.SortEnum;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +18,9 @@ public interface EmployeeService {
 
   List<Employee> getEmployeeByMiddleName(String middleName, SortEnum sortEnum);
 
-  List<Employee> getEmployeeByHiringDate(String hiringDate, SortEnum sortEnum);
+  List<Employee> getEmployeeByHiringDate(LocalDate hiringDate, SortEnum sortEnum);
 
-  List<Employee> getAll(SortEnum sortEnum);
+  List<Employee> getAll(Comparator<Employee> employeeComparator);
 
   Optional<Employee> deleteEmployeeByEmployeeNumber(int employeeNumber);
 

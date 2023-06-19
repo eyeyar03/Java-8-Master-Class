@@ -4,6 +4,8 @@ import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.repository.EmployeeRepository;
 import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.util.SortEnum;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -39,14 +41,14 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public List<Employee> getEmployeeByHiringDate(String hiringDate, SortEnum sortEnum) {
+  public List<Employee> getEmployeeByHiringDate(LocalDate hiringDate, SortEnum sortEnum) {
     return getMatchedEmployees(e -> e.getHiringDate().equals(hiringDate), sortEnum);
   }
 
   @Override
-  public List<Employee> getAll(SortEnum sortEnum) {
+  public List<Employee> getAll(Comparator<Employee> employeeComparator) {
     return EmployeeRepository.getEmployees().stream()
-        .sorted(sortEnum.getComparator())
+        .sorted(employeeComparator)
         .collect(Collectors.toList());
   }
 

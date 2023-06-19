@@ -76,6 +76,10 @@ public final class Constants {
 
   public static final String OPTION_LIST_ALL_EMPLOYEE_RECORDS = "List All Employee Records";
 
+  public static final String OPTION_ORDER_BY_ASC = "Ascending";
+
+  public static final String OPTION_ORDER_BY_DESC = "Descending";
+
   public static final String OPTION_READ_FROM_FILE = "Read From File";
 
   public static final String OPTION_SEARCH_BY_EMPLOYEE_NUMBER = "Search by Employee Number";

@@ -34,8 +34,11 @@ public class SortMenuAction implements CommandAction {
 
   private final UserSelectionState userSelectionState;
 
+  private final CommandAction orderMenuAction;
+
   public SortMenuAction(UserSelectionState userSelectionState) {
     this.userSelectionState = userSelectionState;
+    orderMenuAction = new OrderMenuAction(userSelectionState);
   }
 
   @Override
@@ -51,5 +54,8 @@ public class SortMenuAction implements CommandAction {
 
     SortEnum sortEnum = SORT_ENUMS_MAP.get(selectedOption);
     userSelectionState.setSortEnum(sortEnum);
+
+    userSelectionState.getPreviousCommandActions().add(this);
+    orderMenuAction.doAction();
   }
 }

@@ -8,6 +8,8 @@ import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.repository.EmployeeRepository;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
 import com.masterclass.employee.directory.util.SortEnum;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +32,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12346)
             .firstName("Bruce")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Wayne")
             .middleName("B")
             .build();
@@ -56,7 +58,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12345)
             .firstName("Peter")
-            .hiringDate("2023-06-06")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 6))
             .lastName("Parker")
             .middleName("S")
             .build();
@@ -82,7 +84,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12346)
             .firstName("Bruce")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Wayne")
             .middleName("B")
             .build());
@@ -92,7 +94,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12351)
             .firstName("Bruce")
-            .hiringDate("2023-06-11")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 11))
             .lastName("Banner")
             .middleName("H")
             .build());
@@ -149,8 +151,8 @@ class EmployeeServiceTest {
 
     assertEquals(2, employees.size());
 
-    assertEquals("2023-06-07", employees.get(0).getHiringDate());
-    assertEquals("2023-06-11", employees.get(1).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 7), employees.get(0).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 11), employees.get(1).getHiringDate());
   }
 
   @Test
@@ -169,7 +171,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12350)
             .firstName("Arthur")
-            .hiringDate("2023-06-10")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 10))
             .lastName("Curry")
             .middleName("A")
             .build());
@@ -179,7 +181,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12352)
             .firstName("Aaron")
-            .hiringDate("2023-05-10")
+            .hiringDate(LocalDate.of(2023, Month.MAY, 10))
             .lastName("Curry")
             .middleName("A")
             .build());
@@ -236,8 +238,8 @@ class EmployeeServiceTest {
 
     assertEquals(2, employees.size());
 
-    assertEquals("2023-05-10", employees.get(0).getHiringDate());
-    assertEquals("2023-06-10", employees.get(1).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.MAY, 10), employees.get(0).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 10), employees.get(1).getHiringDate());
   }
 
   @Test
@@ -256,7 +258,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12345)
             .firstName("Peter")
-            .hiringDate("2023-06-06")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 6))
             .lastName("Parker")
             .middleName("S")
             .build());
@@ -266,7 +268,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12349)
             .firstName("Peter")
-            .hiringDate("2023-06-01")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 1))
             .lastName("Quill")
             .middleName("S")
             .build());
@@ -320,14 +322,15 @@ class EmployeeServiceTest {
 
     assertEquals(2, employees.size());
 
-    assertEquals("2023-06-01", employees.get(0).getHiringDate());
-    assertEquals("2023-06-06", employees.get(1).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 1), employees.get(0).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 6), employees.get(1).getHiringDate());
   }
 
   @Test
   void getEmployeeByHiringDateShouldReturnNoEmployees() {
     List<Employee> employees =
-        employeeService.getEmployeeByHiringDate("2022-01-01", SortEnum.defaultSort());
+        employeeService.getEmployeeByHiringDate(
+            LocalDate.of(2022, Month.JANUARY, 1), SortEnum.defaultSort());
 
     assertTrue(employees.isEmpty());
   }
@@ -340,7 +343,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12346)
             .firstName("Bruce")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Wayne")
             .middleName("B")
             .build());
@@ -350,13 +353,14 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12347)
             .firstName("Barry")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Allen")
             .middleName("F")
             .build());
 
     List<Employee> employees =
-        employeeService.getEmployeeByHiringDate("2023-06-07", SortEnum.defaultSort());
+        employeeService.getEmployeeByHiringDate(
+            LocalDate.of(2023, Month.JUNE, 7), SortEnum.defaultSort());
 
     assertFalse(employees.isEmpty());
     assertEquals(2, employees.size());
@@ -370,7 +374,8 @@ class EmployeeServiceTest {
   @Test
   void getEmployeeByHiringDateShouldReturnEmployees_sortedByEmployeeNumber() {
     List<Employee> employees =
-        employeeService.getEmployeeByHiringDate("2023-06-07", SortEnum.BY_EMPLOYEE_NUMBER);
+        employeeService.getEmployeeByHiringDate(
+            LocalDate.of(2023, Month.JUNE, 7), SortEnum.BY_EMPLOYEE_NUMBER);
 
     assertEquals(2, employees.size());
 
@@ -381,7 +386,8 @@ class EmployeeServiceTest {
   @Test
   void getEmployeeByHiringDateShouldReturnEmployees_sortedByFirstName() {
     List<Employee> employees =
-        employeeService.getEmployeeByHiringDate("2023-06-07", SortEnum.BY_FIRST_NAME);
+        employeeService.getEmployeeByHiringDate(
+            LocalDate.of(2023, Month.JUNE, 7), SortEnum.BY_FIRST_NAME);
 
     assertEquals(2, employees.size());
 
@@ -392,7 +398,8 @@ class EmployeeServiceTest {
   @Test
   void getEmployeeByHiringDateShouldReturnEmployees_sortedByLastName() {
     List<Employee> employees =
-        employeeService.getEmployeeByHiringDate("2023-06-07", SortEnum.BY_LAST_NAME);
+        employeeService.getEmployeeByHiringDate(
+            LocalDate.of(2023, Month.JUNE, 7), SortEnum.BY_LAST_NAME);
 
     assertEquals(2, employees.size());
 
@@ -403,12 +410,13 @@ class EmployeeServiceTest {
   @Test
   void getEmployeeByHiringDateShouldReturnEmployees_sortedByHiringDate() {
     List<Employee> employees =
-        employeeService.getEmployeeByHiringDate("2023-06-07", SortEnum.BY_HIRING_DATE);
+        employeeService.getEmployeeByHiringDate(
+            LocalDate.of(2023, Month.JUNE, 7), SortEnum.BY_HIRING_DATE);
 
     assertEquals(2, employees.size());
 
-    assertEquals("2023-06-07", employees.get(0).getHiringDate());
-    assertEquals("2023-06-07", employees.get(1).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 7), employees.get(0).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 7), employees.get(1).getHiringDate());
   }
 
   @Test
@@ -419,7 +427,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12345)
             .firstName("Peter")
-            .hiringDate("2023-06-06")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 6))
             .lastName("Parker")
             .middleName("S")
             .build());
@@ -429,7 +437,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12346)
             .firstName("Bruce")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Wayne")
             .middleName("B")
             .build());
@@ -439,7 +447,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12347)
             .firstName("Barry")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Allen")
             .middleName("F")
             .build());
@@ -449,7 +457,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12348)
             .firstName("Tony")
-            .hiringDate("2023-06-08")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 8))
             .lastName("Stark")
             .middleName("I")
             .build());
@@ -459,7 +467,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12349)
             .firstName("Peter")
-            .hiringDate("2023-06-01")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 1))
             .lastName("Quill")
             .middleName("S")
             .build());
@@ -469,7 +477,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12350)
             .firstName("Arthur")
-            .hiringDate("2023-06-10")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 10))
             .lastName("Curry")
             .middleName("A")
             .build());
@@ -479,7 +487,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12351)
             .firstName("Bruce")
-            .hiringDate("2023-06-11")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 11))
             .lastName("Banner")
             .middleName("H")
             .build());
@@ -489,12 +497,12 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12352)
             .firstName("Aaron")
-            .hiringDate("2023-05-10")
+            .hiringDate(LocalDate.of(2023, Month.MAY, 10))
             .lastName("Curry")
             .middleName("A")
             .build());
 
-    List<Employee> employees = employeeService.getAll(SortEnum.defaultSort());
+    List<Employee> employees = employeeService.getAll(SortEnum.defaultSort().getComparator());
 
     assertFalse(employees.isEmpty());
     assertEquals(8, employees.size());
@@ -507,7 +515,7 @@ class EmployeeServiceTest {
 
   @Test
   void getAllShouldReturnEmployees_sortedByEmployeeNumber() {
-    List<Employee> employees = employeeService.getAll(SortEnum.BY_EMPLOYEE_NUMBER);
+    List<Employee> employees = employeeService.getAll(SortEnum.BY_EMPLOYEE_NUMBER.getComparator());
 
     assertEquals(8, employees.size());
 
@@ -523,7 +531,7 @@ class EmployeeServiceTest {
 
   @Test
   void getAllShouldReturnEmployees_sortedByFirstName() {
-    List<Employee> employees = employeeService.getAll(SortEnum.BY_FIRST_NAME);
+    List<Employee> employees = employeeService.getAll(SortEnum.BY_FIRST_NAME.getComparator());
 
     assertEquals(8, employees.size());
 
@@ -539,7 +547,7 @@ class EmployeeServiceTest {
 
   @Test
   void getAllShouldReturnEmployees_sortedByLastName() {
-    List<Employee> employees = employeeService.getAll(SortEnum.BY_LAST_NAME);
+    List<Employee> employees = employeeService.getAll(SortEnum.BY_LAST_NAME.getComparator());
 
     assertEquals(8, employees.size());
 
@@ -555,28 +563,28 @@ class EmployeeServiceTest {
 
   @Test
   void getAllShouldReturnEmployees_sortedByHiringDate() {
-    List<Employee> employees = employeeService.getAll(SortEnum.BY_HIRING_DATE);
+    List<Employee> employees = employeeService.getAll(SortEnum.BY_HIRING_DATE.getComparator());
 
     assertEquals(8, employees.size());
 
-    assertEquals("2023-05-10", employees.get(0).getHiringDate());
-    assertEquals("2023-06-01", employees.get(1).getHiringDate());
-    assertEquals("2023-06-06", employees.get(2).getHiringDate());
-    assertEquals("2023-06-07", employees.get(3).getHiringDate());
-    assertEquals("2023-06-07", employees.get(4).getHiringDate());
-    assertEquals("2023-06-08", employees.get(5).getHiringDate());
-    assertEquals("2023-06-10", employees.get(6).getHiringDate());
-    assertEquals("2023-06-11", employees.get(7).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.MAY, 10), employees.get(0).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 1), employees.get(1).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 6), employees.get(2).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 7), employees.get(3).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 7), employees.get(4).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 8), employees.get(5).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 10), employees.get(6).getHiringDate());
+    assertEquals(LocalDate.of(2023, Month.JUNE, 11), employees.get(7).getHiringDate());
   }
 
   @Test
   void shouldDeleteEmployee() {
-    List<Employee> employees = employeeService.getAll(SortEnum.defaultSort());
+    List<Employee> employees = employeeService.getAll(SortEnum.defaultSort().getComparator());
     assertEquals(8, employees.size());
 
     employeeService.deleteEmployeeByEmployeeNumber(12345);
 
-    employees = employeeService.getAll(SortEnum.defaultSort());
+    employees = employeeService.getAll(SortEnum.defaultSort().getComparator());
     assertEquals(7, employees.size());
 
     Optional<Employee> optionalEmployee = employeeService.getEmployeeByEmployeeNumber(12345);
@@ -603,7 +611,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12345)
             .firstName("Peter")
-            .hiringDate("2023-06-06")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 6))
             .lastName("Parker")
             .middleName("S")
             .build());
@@ -612,7 +620,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12346)
             .firstName("Bruce")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Wayne")
             .middleName("B")
             .build());
@@ -621,7 +629,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12347)
             .firstName("Barry")
-            .hiringDate("2023-06-07")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
             .lastName("Allen")
             .middleName("F")
             .build());
@@ -630,7 +638,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12348)
             .firstName("Tony")
-            .hiringDate("2023-06-08")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 8))
             .lastName("Stark")
             .middleName("I")
             .build());
@@ -639,7 +647,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12349)
             .firstName("Peter")
-            .hiringDate("2023-06-01")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 1))
             .lastName("Quill")
             .middleName("S")
             .build());
@@ -648,7 +656,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12350)
             .firstName("Arthur")
-            .hiringDate("2023-06-10")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 10))
             .lastName("Curry")
             .middleName("A")
             .build());
@@ -657,7 +665,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12351)
             .firstName("Bruce")
-            .hiringDate("2023-06-11")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 11))
             .lastName("Banner")
             .middleName("H")
             .build());
@@ -666,7 +674,7 @@ class EmployeeServiceTest {
         Employee.builder()
             .employeeNumber(12352)
             .firstName("Aaron")
-            .hiringDate("2023-05-10")
+            .hiringDate(LocalDate.of(2023, Month.MAY, 10))
             .lastName("Curry")
             .middleName("A")
             .build());

@@ -13,6 +13,7 @@ import static com.masterclass.employee.directory.util.Constants.EMPTY_STRING;
 
 import com.masterclass.employee.directory.menu.CommandAction;
 import com.masterclass.employee.directory.model.Employee;
+import com.masterclass.employee.directory.util.DateTimeFormatterEnum;
 import java.util.List;
 
 public class DisplayEmployeesAction implements CommandAction {
@@ -50,7 +51,7 @@ public class DisplayEmployeesAction implements CommandAction {
             employee.getFirstName(),
             employee.getMiddleName(),
             employee.getLastName()),
-        employee.getHiringDate());
+        employee.getHiringDate().format(DateTimeFormatterEnum.MMMsDDscYYYY.getDateTimeFormatter()));
   }
 
   private void displayNoRecordsFound() {
