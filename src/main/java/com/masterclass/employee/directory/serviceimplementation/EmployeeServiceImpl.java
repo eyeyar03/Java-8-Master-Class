@@ -57,6 +57,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     return Optional.empty();
   }
 
+  @Override
+  public void addAllEmployee(List<Employee> employees) {
+    EmployeeRepository.addAllEmployees(employees);
+  }
+
   private List<Employee> getMatchedEmployees(
       Predicate<Employee> employeePredicate, SortEnum sortEnum) {
 

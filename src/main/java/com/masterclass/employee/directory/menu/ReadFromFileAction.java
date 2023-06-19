@@ -2,6 +2,7 @@ package com.masterclass.employee.directory.menu;
 
 import com.masterclass.employee.directory.model.Employee;
 import com.masterclass.employee.directory.service.EmployeeService;
+import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
 import com.masterclass.employee.directory.util.InputHelper;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.stream.Stream;
 import static com.masterclass.employee.directory.util.Constants.*;
 
 public class ReadFromFileAction implements CommandAction{
-    EmployeeService
+    private EmployeeService employeeService = new EmployeeServiceImpl();
     @Override
     public void doAction() {
         Optional<List<Employee>> optionalEmployees;
@@ -27,16 +28,18 @@ public class ReadFromFileAction implements CommandAction{
             optionalEmployees = parseEmployeeFromFile();
         }while(!optionalEmployees.isPresent());
 
-        employeeService.addEmployee(employee);
+        employeeService.addAllEmployee(optionalEmployees.get());
     }
 
     private Optional<List<Employee>> parseEmployeeFromFile() {
         Optional<List<Employee>> optionalEmployees = Optional.empty();
         String fileName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_FILENAME);
+//        String fileName = "exercise6.txt";
 
         try(Stream<String> lines = Files.lines(Paths.get(fileName))){
             List<Employee> employees = lines.skip(1).map(this::buildEmployee).collect(Collectors.toList());
             optionalEmployees = Optional.of(employees);
+
 
         }catch(Exception e){
             System.out.println("Error encountered reading file " +fileName);

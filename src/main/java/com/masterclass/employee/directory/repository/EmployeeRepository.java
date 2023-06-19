@@ -21,4 +21,8 @@ public class EmployeeRepository {
   public static void setEmployees(List<Employee> employees) {
     EmployeeRepository.employees = employees;
   }
+
+  public static void addAllEmployees(List<Employee> employees){
+    employees.addAll(employees);
+  }
 }
