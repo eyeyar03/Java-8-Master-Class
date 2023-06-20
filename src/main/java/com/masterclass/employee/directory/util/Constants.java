@@ -71,9 +71,15 @@ public final class Constants {
 
   public static final String OPTION_EXIT = "Exit";
 
+  public static final String OPTION_EXPORT_AS_ENCODED = "Export as ENCODED";
+
+  public static final String OPTION_EXPORT_AS_NOT_ENCODED = "Export as NOT ENCODED";
+
   public static final String OPTION_EXPORT_TO_FILE = "Export to File";
 
   public static final String OPTION_HEADER_CHOOSE_AN_ACTION = "Choose an action";
+
+  public static final String OPTION_HEADER_EXPORT_OPTIONS = "Export Options";
   public static final String OPTION_HEADER_MAIN_OPTIONS = "Main Options";
 
   public static final String OPTION_LIST_ALL_EMPLOYEE_RECORDS = "List All Employee Records";
