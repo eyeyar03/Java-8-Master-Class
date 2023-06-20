@@ -11,11 +11,13 @@ public final class Constants {
   public static final String DISPLAY_NO_RECORDS_FOUND = "No records found.";
   public static final String DISPLAY_NO_RECORDS_FOUND_FORMAT = "| %60s %-45s | \n";
 
-  public static final String DISPLAY_TABLE_BODY_FORMAT = "| %-25s | %-50s | %-25s |\n";
+  public static final String DISPLAY_TABLE_BODY_FORMAT = " %-25s  %-50s  %-25s \n";
+
+  public static final String DISPLAY_TABLE__HEADER_EMPLOYEE_NAME = "Employee Name";
 
   public static final String DISPLAY_TABLE_HEADER_EMPLOYEE_NUMBER = "Employee Number";
 
-  public static final String DISPLAY_TABLE_HEADER_FORMAT = "| %-25s | %-50s | %-25s |\n";
+  public static final String DISPLAY_TABLE_HEADER_FORMAT = " %-25s  %-50s  %-25s \n";
 
   public static final String DISPLAY_TABLE_HEADER_HIRING_DATE = "Date Hired";
 

@@ -30,6 +30,7 @@ public class MainMenuAction implements CommandAction {
     commandActionsMap.put(3, new DeleteEmployeeAction(userSelectionState));
     commandActionsMap.put(4, new SearchEmployeeAction(userSelectionState));
     commandActionsMap.put(5, new ReadFromFileAction(userSelectionState));
+    commandActionsMap.put(6, new ExportToFileAction(userSelectionState));
     commandActionsMap.put(-1, new ExitAction());
   }
 
