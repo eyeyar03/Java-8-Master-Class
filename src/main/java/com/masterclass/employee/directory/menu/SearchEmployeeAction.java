@@ -21,6 +21,7 @@ import com.masterclass.employee.directory.service.EmployeeService;
 import com.masterclass.employee.directory.serviceimplementation.EmployeeServiceImpl;
 import com.masterclass.employee.directory.util.InputHelper;
 import com.masterclass.employee.directory.util.SortEnum;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,78 +40,78 @@ import java.util.function.Supplier;
 @Option(label = OPTION_BACK, key = -1)
 public class SearchEmployeeAction implements CommandAction {
 
-  private final Function<List<Employee>, CommandAction> displayEmployeesActionFunction =
-      DisplayEmployeesAction::new;
+    private final Function<List<Employee>, CommandAction> displayEmployeesActionFunction =
+            DisplayEmployeesAction::new;
 
-  private final Map<Integer, Supplier<List<Employee>>> searchesMap;
+    private final Map<Integer, Supplier<List<Employee>>> searchesMap;
 
-  {
-    searchesMap = new HashMap<>();
-    searchesMap.put(1, this::searchByEmployeeNumber);
-    searchesMap.put(2, this::searchByFirstName);
-    searchesMap.put(3, this::searchByMiddleName);
-    searchesMap.put(4, this::searchByLastName);
-    searchesMap.put(5, this::searchByHiringDate);
-  }
-
-  private EmployeeService employeeService = new EmployeeServiceImpl();
-  private final UserSelectionState userSelectionState;
-
-  public SearchEmployeeAction(UserSelectionState userSelectionState) {
-    this.userSelectionState = userSelectionState;
-  }
-
-  @Override
-  public void doAction() {
-    int selectedOption =
-        InputHelper.askUserToSelect(
-            this.getClass(), OPTION_HEADER_CHOOSE_AN_ACTION, INSTRUCTION_SELECT_AN_ACTION);
-
-    if (selectedOption == -1) {
-      userSelectionState.getPreviousCommandActions().pop().doAction();
-      return;
+    {
+        searchesMap = new HashMap<>();
+        searchesMap.put(1, this::searchByEmployeeNumber);
+        searchesMap.put(2, this::searchByFirstName);
+        searchesMap.put(3, this::searchByMiddleName);
+        searchesMap.put(4, this::searchByLastName);
+        searchesMap.put(5, this::searchByHiringDate);
     }
 
-    userSelectionState.getPreviousCommandActions().add(this);
-    Supplier<List<Employee>> searchSupplier = searchesMap.get(selectedOption);
+    private EmployeeService employeeService = new EmployeeServiceImpl();
+    private final UserSelectionState userSelectionState;
 
-    displayEmployeesActionFunction.apply(searchSupplier.get()).doAction();
+    public SearchEmployeeAction(UserSelectionState userSelectionState) {
+        this.userSelectionState = userSelectionState;
+    }
 
-    userSelectionState.getPreviousCommandActions().pop().doAction();
-  }
+    @Override
+    public void doAction() {
+        int selectedOption =
+                InputHelper.askUserToSelect(
+                        this.getClass(), OPTION_HEADER_CHOOSE_AN_ACTION, INSTRUCTION_SELECT_AN_ACTION);
 
-  private List<Employee> searchByEmployeeNumber() {
-    int employeeNumber = InputHelper.askUserToProvideEmployeeNumber();
+        if (selectedOption == -1) {
+            userSelectionState.getPreviousCommandActions().pop().doAction();
+            return;
+        }
 
-    Optional<Employee> employeeOptional =
-        employeeService.getEmployeeByEmployeeNumber(employeeNumber);
+        userSelectionState.getPreviousCommandActions().add(this);
+        Supplier<List<Employee>> searchSupplier = searchesMap.get(selectedOption);
 
-    return employeeOptional.isPresent()
-        ? Arrays.asList(employeeOptional.get())
-        : Collections.emptyList();
-  }
+        displayEmployeesActionFunction.apply(searchSupplier.get()).doAction();
 
-  private List<Employee> searchByFirstName() {
-    String firstName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_FIRST_NAME);
+        userSelectionState.getPreviousCommandActions().pop().doAction();
+    }
 
-    return employeeService.getEmployeeByFirstName(firstName, SortEnum.defaultSort());
-  }
+    private List<Employee> searchByEmployeeNumber() {
+        int employeeNumber = InputHelper.askUserToProvideEmployeeNumber();
 
-  private List<Employee> searchByLastName() {
-    String lastName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_LAST_NAME);
+        Optional<Employee> employeeOptional =
+                employeeService.getEmployeeByEmployeeNumber(employeeNumber);
 
-    return employeeService.getEmployeeByLastName(lastName, SortEnum.defaultSort());
-  }
+        return employeeOptional.isPresent()
+                ? Arrays.asList(employeeOptional.get())
+                : Collections.emptyList();
+    }
 
-  private List<Employee> searchByMiddleName() {
-    String middleName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_MIDDLE_NAME);
+    private List<Employee> searchByFirstName() {
+        String firstName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_FIRST_NAME);
 
-    return employeeService.getEmployeeByMiddleName(middleName, SortEnum.defaultSort());
-  }
+        return employeeService.getEmployeeByFirstName(firstName.toLowerCase(), SortEnum.defaultSort());
+    }
 
-  private List<Employee> searchByHiringDate() {
-    LocalDate hiringDate = InputHelper.askUserToProvideHiringDate(INSTRUCTION_ENTER_HIRING_DATE);
+    private List<Employee> searchByLastName() {
+        String lastName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_LAST_NAME);
 
-    return employeeService.getEmployeeByHiringDate(hiringDate, SortEnum.defaultSort());
-  }
+        return employeeService.getEmployeeByLastName(lastName.toLowerCase(), SortEnum.defaultSort());
+    }
+
+    private List<Employee> searchByMiddleName() {
+        String middleName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER_MIDDLE_NAME);
+
+        return employeeService.getEmployeeByMiddleName(middleName.toLowerCase(), SortEnum.defaultSort());
+    }
+
+    private List<Employee> searchByHiringDate() {
+        LocalDate hiringDate = InputHelper.askUserToProvideHiringDate(INSTRUCTION_ENTER_HIRING_DATE);
+
+        return employeeService.getEmployeeByHiringDate(hiringDate, SortEnum.defaultSort());
+    }
 }
