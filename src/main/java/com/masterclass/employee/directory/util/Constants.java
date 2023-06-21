@@ -27,13 +27,9 @@ public final class Constants {
 
   public static final String INSTRUCTION_ENTER_ACTION_TYPE = "Enter action type: ";
 
-  public static final String INSTRUCTION_ENTER_FIRST_NAME = "Enter Employee First Name: ";
+  public static final String INSTRUCTION_ENTER_HIRING_DATE = "Enter Date Hired (yyyy-MM-dd): ";
 
-  public static final String INSTRUCTION_ENTER_HIRING_DATE = "Enter Date Hired: ";
-
-  public static final String INSTRUCTION_ENTER_LAST_NAME = "Enter Employee Last Name: ";
-
-  public static final String INSTRUCTION_ENTER_MIDDLE_NAME = "Enter Employee Middle Name: ";
+  public static final String INSTRUCTION_ENTER__NAME = "Enter Name: ";
 
   public static final String INSTRUCTION_FIRST_NAME = "First name: ";
 
@@ -92,13 +88,9 @@ public final class Constants {
 
   public static final String OPTION_SEARCH_BY_EMPLOYEE_NUMBER = "Search by Employee Number";
 
-  public static final String OPTION_SEARCH_BY_FIRST_NAME = "Search by First Name";
-
   public static final String OPTION_SEARCH_BY_HIRING_DATE = "Search by Hiring Date";
 
-  public static final String OPTION_SEARCH_BY_LAST_NAME = "Search by Last Name";
-
-  public static final String OPTION_SEARCH_BY_MIDDLE_NAME = "Search by Middle Name";
+  public static final String OPTION_SEARCH_BY_NAME = "Search by Name";
 
   public static final String OPTION_SEARCH_EMPLOYEE_RECORD = "Search Employee Record";
 

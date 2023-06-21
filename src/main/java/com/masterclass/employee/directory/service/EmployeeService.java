@@ -18,6 +18,8 @@ public interface EmployeeService {
 
   List<Employee> getEmployeeByMiddleName(String middleName, SortEnum sortEnum);
 
+  List<Employee> getEmployeeByName(String name, SortEnum sortEnum);
+
   List<Employee> getEmployeeByHiringDate(LocalDate hiringDate, SortEnum sortEnum);
 
   List<Employee> getAll(Comparator<Employee> employeeComparator);

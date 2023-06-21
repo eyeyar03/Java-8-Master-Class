@@ -4,6 +4,7 @@ import com.masterclass.employee.directory.exceptions.FutureDateIsNotAllowedExcep
 import com.masterclass.employee.directory.menu.option.Option;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -79,14 +80,33 @@ public class InputHelper {
   }
 
   public static String askUserToProvideInput(String instruction) {
+    Optional<String> optionalInput;
+
+    do {
+      optionalInput = getInput(instruction);
+    } while (!optionalInput.isPresent());
+
+    return optionalInput.get();
+  }
+
+  private static Optional<String> getInput(String instruction) {
+    Optional<String> optionalProvidedInput = Optional.empty();
+
     System.out.print(instruction);
 
     Scanner scanner = new Scanner(System.in);
-    return scanner.nextLine();
+    String providedInput = scanner.nextLine();
+
+    if ((Objects.nonNull(providedInput) && (providedInput.trim().length() > 0))) {
+      optionalProvidedInput = Optional.of(providedInput);
+    } else {
+      System.out.println("Please provide a valid input.");
+    }
+
+    return optionalProvidedInput;
   }
 
   public static LocalDate askUserToProvideHiringDate(String instruction) {
-
     Optional<LocalDate> optionalHiringDate;
     do {
       optionalHiringDate = getHiringDate(instruction);

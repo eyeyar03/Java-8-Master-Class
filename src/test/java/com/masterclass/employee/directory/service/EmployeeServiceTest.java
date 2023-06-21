@@ -69,6 +69,40 @@ class EmployeeServiceTest {
   }
 
   @Test
+  void getEmployeeByNameShouldReturnEmployees() {
+    Map<Integer, Employee> expectedEmployeesMap = new HashMap<>();
+    expectedEmployeesMap.put(
+        12346,
+        Employee.builder()
+            .employeeNumber(12346)
+            .firstName("Bruce")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 7))
+            .lastName("Wayne")
+            .middleName("B")
+            .build());
+
+    expectedEmployeesMap.put(
+        12351,
+        Employee.builder()
+            .employeeNumber(12351)
+            .firstName("Bruce")
+            .hiringDate(LocalDate.of(2023, Month.JUNE, 11))
+            .lastName("Banner")
+            .middleName("H")
+            .build());
+
+    List<Employee> employees = employeeService.getEmployeeByName("ruce", SortEnum.defaultSort());
+
+    assertFalse(employees.isEmpty());
+    assertEquals(2, employees.size());
+
+    employees.forEach(
+        e ->
+            assertEmployee(
+                expectedEmployeesMap.get(e.getEmployeeNumber()), Optional.ofNullable(e)));
+  }
+
+  @Test
   void getEmployeeByFirstNameShouldReturnNoEmployees() {
     List<Employee> employees =
         employeeService.getEmployeeByFirstName("Spidey", SortEnum.defaultSort());
