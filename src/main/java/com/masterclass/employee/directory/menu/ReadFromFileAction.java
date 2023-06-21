@@ -63,9 +63,9 @@ public class ReadFromFileAction implements CommandAction {
 
     return Employee.builder()
         .employeeNumber(Integer.parseInt(employeeDetails[0]))
-        .firstName(employeeDetails[1])
-        .middleName(employeeDetails[2])
-        .lastName(employeeDetails[3])
+        .firstName(employeeDetails[1].trim())
+        .middleName(employeeDetails[2].trim())
+        .lastName(employeeDetails[3].trim())
         .hiringDate(getHiringDate(dateHired))
         .build();
   }
