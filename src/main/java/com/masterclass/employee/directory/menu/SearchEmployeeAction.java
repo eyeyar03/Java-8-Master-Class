@@ -83,9 +83,9 @@ public class SearchEmployeeAction implements CommandAction {
   }
 
   private List<Employee> searchByName() {
-    String firstName = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER__NAME);
+    String name = InputHelper.askUserToProvideInput(INSTRUCTION_ENTER__NAME);
 
-    return employeeService.getEmployeeByName(firstName, SortEnum.defaultSort());
+    return employeeService.getEmployeeByName(name, SortEnum.defaultSort());
   }
 
   private List<Employee> searchByHiringDate() {
